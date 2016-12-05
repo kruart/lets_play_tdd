@@ -1,4 +1,4 @@
-package ua.kruart.tdd;
+package ua.kruart.tdd.finances;
 
 /**
  * Created by Arthur on 05.12.2016.
@@ -19,4 +19,9 @@ public class SavingsAccount {
         return balance;
     }
 
+    public SavingsAccount nextYear(int interestRate) {
+        SavingsAccount result = new SavingsAccount();
+        result.deposit(balance() + (balance() * interestRate / 100));
+        return result;
+    }
 }
