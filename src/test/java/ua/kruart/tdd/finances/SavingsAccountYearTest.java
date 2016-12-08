@@ -15,50 +15,24 @@ public class SavingsAccountYearTest {
     }
 
     @Test
-    public void interestRateMatchesConstructor() {
-        assertEquals(10, newAccount().interestRate());
-    }
-
-    @Test
-    public void endingBalanceAppliesInterestRate() {
-        assertEquals(11000, newAccount().endingBalance(25));
-    }
-
-    @Test
-    public void nextYearsStartingBalanceEqualsThisYearsEndingBalance() {
-        SavingsAccountYear thisYear = newAccount();
-        assertEquals(thisYear.endingBalance(25), thisYear.nextYear(25).startingBalance());
-    }
-
-    @Test
-    public void nextYearsInterestRateEqualsThisYearsInterestRate() {
-        SavingsAccountYear thisYear = newAccount();
-        assertEquals(thisYear.interestRate(), thisYear.nextYear(25).interestRate());
-    }
-
-    @Test
-    public void withdrawingFundsOccursAtTheBeginningOfTheYear() {
-        SavingsAccountYear year = newAccount();
-        year.withdraw(1000);
-        assertEquals(9900, year.endingBalance(25));
-    }
-
-    @Test
-    public void multipleWithdrawalsInYear() {
-        SavingsAccountYear year = newAccount();
-        year.withdraw(1000);
-        year.withdraw(2000);
-        assertEquals(3000, year.totalWithdrawn());
-    }
-
-    @Test
-    public void startingPrincipal() {
+    public void startingPrincipalMathcesConstructor() {
         SavingsAccountYear year = new SavingsAccountYear(10000, 3000, 10);
         assertEquals(3000, year.startingPrincipal());
     }
 
     @Test
-    public void endingPrincipal() {
+    public void interestRateMatchesConstructor() {
+        assertEquals(10, newAccount().interestRate());
+    }
+
+    @Test
+    public void startingCapitalGainsIsStartingBalanceMinusStartingPrincipal() {
+        SavingsAccountYear year = new SavingsAccountYear(10000, 3000, 10);
+        assertEquals(7000, year.startingCapitalGains());
+    }
+
+    @Test
+    public void endingPrincipalConsidersWithdrawals() {
         SavingsAccountYear year = new SavingsAccountYear(10000, 3000, 10);
         year.withdraw(2000);
         assertEquals("ending principal", 1000, year.endingPrincipal());
@@ -72,7 +46,35 @@ public class SavingsAccountYearTest {
     }
 
     @Test
-    public void capitalGainsWithdrawn() {
+    public void endingCapitalGainsIncludesInterestEarned() {
+        SavingsAccountYear year = new SavingsAccountYear(10000, 3000, 10);
+        assertEquals(7000, year.startingCapitalGains());
+
+//        assertEquals(4000, year.endingCapitalGains());
+    }
+
+    @Test
+    public void endingBalanceAppliesInterestRate() {
+        assertEquals(11000, newAccount().endingBalance(25));
+    }
+
+    @Test
+    public void withdrawnFundsDoNotEarnInterest() {
+        SavingsAccountYear year = newAccount();
+        year.withdraw(1000);
+        assertEquals(9900, year.endingBalance(25));
+    }
+
+    @Test
+    public void multipleWithdrawalsInYearAreTotaled() {
+        SavingsAccountYear year = newAccount();
+        year.withdraw(1000);
+        year.withdraw(2000);
+        assertEquals(3000, year.totalWithdrawn());
+    }
+
+    @Test
+    public void withdrawingMoreThanPrincipalTakesFromCapitalGains() {
         SavingsAccountYear year = new SavingsAccountYear(10000, 3000, 10);
         year.withdraw(1000);
         assertEquals(0, year.capitalGainsWithdrawn());
@@ -99,7 +101,19 @@ public class SavingsAccountYearTest {
         assertEquals((int)(expectedStartingBalanceAfterWithdrawals * 1.10), year.endingBalance(25));
     }
 
+    @Test
+    public void nextYearsStartingBalanceEqualsThisYearsEndingBalance() {
+        SavingsAccountYear thisYear = newAccount();
+        assertEquals(thisYear.endingBalance(25), thisYear.nextYear(25).startingBalance());
+    }
+
+    @Test
+    public void nextYearsInterestRateEqualsThisYearsInterestRate() {
+        SavingsAccountYear thisYear = newAccount();
+        assertEquals(thisYear.interestRate(), thisYear.nextYear(25).interestRate());
+    }
+
     private SavingsAccountYear newAccount() {
-        return new SavingsAccountYear(10000, 10);
+        return new SavingsAccountYear(10000, 10000, 10);
     }
 }
