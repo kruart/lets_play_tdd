@@ -4,17 +4,18 @@ package ua.kruart.tdd.finances;
  * Created by Arthur on 05.12.2016.
  */
 
-public class SavingsAccountYear {
+public class StockMarketYear {
 
-    private int startingBalance = 0;
-    private int interestRate = 0;
-    private int totalWithdrawals = 0;
+    private int startingBalance;
+    private int interestRate;
+    private int totalWithdrawals;
     private int startingPrincipal;
 
-    public SavingsAccountYear(int startingBalance, int startingPrincipal, int interestRate) {
+    public StockMarketYear(int startingBalance, int startingPrincipal, int interestRate) {
         this.startingBalance = startingBalance;
         this.startingPrincipal = startingPrincipal;
         this.interestRate = interestRate;
+        this.totalWithdrawals = 0;
     }
 
     public int startingBalance() {
@@ -23,10 +24,6 @@ public class SavingsAccountYear {
 
     public int startingPrincipal() {
         return startingPrincipal;
-    }
-
-    public int startingCapitalGains() {
-        return startingBalance - startingPrincipal;
     }
 
     public int interestRate() {
@@ -61,16 +58,12 @@ public class SavingsAccountYear {
         return Math.max(0, result);
     }
 
-    public int endingCapitalGains(int capitalGainsTaxRate) {
-        return startingCapitalGains() - capitalGainsWithdrawn() + interestEarned(capitalGainsTaxRate);
-    }
-
     public int endingBalance(int capitalGainsTaxRate) {
         int modifiedStart = startingBalance - totalWithdrawn(capitalGainsTaxRate);
         return modifiedStart + interestEarned(capitalGainsTaxRate);
     }
 
-    public SavingsAccountYear nextYear(int capitalGainsTaxRate) {
-        return new SavingsAccountYear(this.endingBalance(capitalGainsTaxRate), 0, interestRate());
+    public StockMarketYear nextYear(int capitalGainsTaxRate) {
+        return new StockMarketYear(this.endingBalance(capitalGainsTaxRate), this.endingPrincipal(), interestRate());
     }
 }
