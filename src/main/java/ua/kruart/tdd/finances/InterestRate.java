@@ -1,27 +1,23 @@
 package ua.kruart.tdd.finances;
 
 /**
- * Created by Arthur on 11.12.2016.
+ * Created by Arthur on 12.12.2016.
  */
-public class TaxRate {
+public class InterestRate {
 
     private double rate;
 
-    public TaxRate(double rateAsPercentage) {
+    public InterestRate(double rateAsPercentage) {
         this.rate = rateAsPercentage / 100.0;
     }
 
-    public int simpleTaxFor(int amount) {
-        return (int)(rate * amount);
-    }
-
-    public int compoundTaxFor(int amount) {
-        return (int)((amount / (1 - rate)) - amount);
+    public int interestOn(int amount) {
+        return (int)(amount * rate);
     }
 
     @Override
     public String toString() {
-        return (rate * 100)+ "%";
+        return (rate * 100) + "%";
     }
 
     @Override
@@ -35,8 +31,9 @@ public class TaxRate {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        TaxRate taxRate = (TaxRate) o;
+        InterestRate that = (InterestRate) o;
 
-        return Double.compare(taxRate.rate, rate) == 0;
+        return Double.compare(that.rate, rate) == 0;
+
     }
 }
