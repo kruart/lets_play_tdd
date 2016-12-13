@@ -27,14 +27,19 @@ public class DollarsTest {
     }
 
     @Test
+    public void toInt() {
+        assertEquals(20, new Dollars(20).toInt());
+    }
+
+    @Test
     public void valueObject() {
         Dollars dollars1a = new Dollars(10);
         Dollars dollars1b = new Dollars(10);
         Dollars dollars2 = new Dollars(20);
 
         assertEquals("$10", dollars1a.toString());
-        assertTrue("dollars with same amount should be equal", dollars1a.equals(dollars1b));
-        assertFalse("dollars with different amount should not be equal", dollars1a.equals(dollars2));
+        assertTrue("dollars with same toInt should be equal", dollars1a.equals(dollars1b));
+        assertFalse("dollars with different toInt should not be equal", dollars1a.equals(dollars2));
         assertTrue("equal dollars should have same hash code", dollars1a.hashCode() == dollars1b.hashCode());
     }
 }

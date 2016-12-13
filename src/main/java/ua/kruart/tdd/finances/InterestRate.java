@@ -11,8 +11,8 @@ public class InterestRate {
         this.rate = rateAsPercentage / 100.0;
     }
 
-    public int interestOn(int amount) {
-        return (int)(amount * rate);
+    public Dollars interestOn(Dollars amount) {
+        return new Dollars((int)(amount.toInt() * rate));
     }
 
     @Override
