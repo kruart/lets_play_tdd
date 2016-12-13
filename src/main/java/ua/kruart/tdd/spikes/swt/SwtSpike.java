@@ -5,6 +5,10 @@ import org.eclipse.swt.events.*;
 import org.eclipse.swt.layout.*;
 import org.eclipse.swt.widgets.*;
 
+/**
+ * Created by Arthur on 13.12.2016.
+ */
+
 public class SwtSpike {
 
     public static void main (String[] args) {
