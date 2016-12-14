@@ -6,8 +6,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
@@ -44,11 +42,7 @@ public class SwingSpike extends JFrame {
     private JMenuItem closeAction() {
         JMenuItem result = new JMenuItem("Close");
         result.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, InputEvent.META_MASK));
-        result.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                SwingSpike.this.dispose();
-            }
-        });
+        result.addActionListener(e -> SwingSpike.this.dispose());
         return result;
     }
 
@@ -61,13 +55,11 @@ public class SwingSpike extends JFrame {
     @SuppressWarnings("unchecked")
     private Component button() {
         final JButton button = new JButton("Foo!");
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                button.setText("The world will end in " + (Math.random() * 100000) + " seconds");
-                for (int i = 0; i < tableModel.getRowCount(); i++) {
-                    int cell = (Integer)tableModel.getValueAt(i, 1);
-                    tableModel.setValueAt((int)(cell * 1.03), i, 1);
-                }
+        button.addActionListener(e -> {
+            button.setText("The world will end in " + (Math.random() * 100000) + " seconds");
+            for (int i = 0; i < tableModel.getRowCount(); i++) {
+                int cell = (Integer)tableModel.getValueAt(i, 1);
+                tableModel.setValueAt((int)(cell * 1.03), i, 1);
             }
         });
 
