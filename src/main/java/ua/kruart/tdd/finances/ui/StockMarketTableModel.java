@@ -1,4 +1,7 @@
-package ua.kruart.tdd.finances;
+package ua.kruart.tdd.finances.ui;
+
+import ua.kruart.tdd.finances.domain.StockMarket;
+import ua.kruart.tdd.finances.domain.StockMarketYear;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -9,11 +12,9 @@ public class StockMarketTableModel extends AbstractTableModel {
     private static final long serialVersionUID = 1L;
     private static final String[] COLUMN_TITLES = {"Year", "Starting Balance", "Starting Principal", "Withdrawals", "Appreciation", "Ending Balance"};
 
-    private int startingYear;
     private StockMarket market;
 
-    public StockMarketTableModel(int startingYear, int endingYear, StockMarket market) {
-        this.startingYear = startingYear;
+    public StockMarketTableModel(StockMarket market) {
         this.market = market;
     }
 
@@ -34,10 +35,10 @@ public class StockMarketTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        StockMarketYear currentYear = market.getYear(rowIndex);
+        StockMarketYear currentYear = market.getYearOffset(rowIndex);
 
         switch (columnIndex) {
-            case 0: return startingYear + rowIndex;
+            case 0: return currentYear.year();
             case 1: return currentYear.startingBalance();
             case 2: return currentYear.startingPrincipal();
             case 3: return currentYear.totalWithdrawn();

@@ -1,6 +1,8 @@
-package ua.kruart.tdd.finances;
+package ua.kruart.tdd.finances.domain;
 
 import org.junit.Test;
+import ua.kruart.tdd.finances.domain.Dollars;
+import ua.kruart.tdd.finances.domain.InterestRate;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

@@ -1,6 +1,7 @@
-package ua.kruart.tdd.finances;
+package ua.kruart.tdd.finances.domain;
 
 import org.junit.Test;
+import ua.kruart.tdd.finances.domain.Dollars;
 
 import static org.junit.Assert.*;
 

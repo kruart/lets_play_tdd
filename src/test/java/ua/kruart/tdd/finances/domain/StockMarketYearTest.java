@@ -1,4 +1,4 @@
-package ua.kruart.tdd.finances;
+package ua.kruart.tdd.finances.domain;
 
 import org.junit.Test;
 
@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class StockMarketYearTest {
 
-    private static final int YEAR = 2010;
+    private static final Year YEAR = new Year(2010);
     private static final Dollars STARTING_BALANCE = new Dollars(10000);
     private static final Dollars  STARTING_PRINCIPAL = new Dollars(3000);
     private static final InterestRate INTEREST_RATE = new InterestRate(10);
@@ -70,7 +70,7 @@ public class StockMarketYearTest {
     public void nextYearStartingValuesMatchesThisYearEndingValues() {
         StockMarketYear thisYear = newYear();
         StockMarketYear nextYear = thisYear.nextYear();
-//        assertEquals("year", 2010, nextYear.year());
+        assertEquals("year", new Year(2011), nextYear.year());
         assertEquals("starting balance", thisYear.endingBalance(), nextYear.startingBalance());
         assertEquals("starting principal", thisYear.endingPrincipal(), nextYear.startingPrincipal());
         assertEquals("interest", thisYear.interestRate(), nextYear.interestRate());

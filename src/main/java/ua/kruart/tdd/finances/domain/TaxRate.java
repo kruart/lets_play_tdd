@@ -1,4 +1,4 @@
-package ua.kruart.tdd.finances;
+package ua.kruart.tdd.finances.domain;
 
 /**
  * Created by Arthur on 11.12.2016.

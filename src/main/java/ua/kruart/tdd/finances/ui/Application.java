@@ -1,4 +1,9 @@
-package ua.kruart.tdd.finances;
+package ua.kruart.tdd.finances.ui;
+
+import ua.kruart.tdd.finances.domain.Dollars;
+import ua.kruart.tdd.finances.domain.InterestRate;
+import ua.kruart.tdd.finances.domain.StockMarket;
+import ua.kruart.tdd.finances.domain.TaxRate;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +25,7 @@ public class Application extends JFrame {
 
     private JScrollPane table() {
         StockMarket market = new StockMarket(2010, 2050, new Dollars(10000), new Dollars(7000), new InterestRate(10), new TaxRate(25));
-        StockMarketTableModel model = new StockMarketTableModel(2010, 2050, market);
+        StockMarketTableModel model = new StockMarketTableModel(market);
         JTable table = new JTable(model);
         return new JScrollPane(table);
     }
