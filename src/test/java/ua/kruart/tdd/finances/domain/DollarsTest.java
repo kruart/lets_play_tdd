@@ -1,7 +1,6 @@
 package ua.kruart.tdd.finances.domain;
 
 import org.junit.Test;
-import ua.kruart.tdd.finances.domain.Dollars;
 
 import static org.junit.Assert.*;
 
@@ -13,6 +12,7 @@ public class DollarsTest {
     @Test
     public void addition() {
         assertEquals(new Dollars(40), new Dollars(10).add(new Dollars(30)));
+        
     }
 
     @Test

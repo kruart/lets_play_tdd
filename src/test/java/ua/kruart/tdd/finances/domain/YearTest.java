@@ -14,6 +14,12 @@ public class YearTest {
         Year thisYear = new Year(2010);
         assertEquals(new Year(2011), thisYear.nextYear());
     }
+
+    @Test
+    public void numberOfYearsInclusive() {
+        Year thisYear = new Year(2010);
+        assertEquals(41, thisYear.numberOfYearsInclusive(new Year(2050)));
+    }
     
     @Test
     public void valueObject() {
