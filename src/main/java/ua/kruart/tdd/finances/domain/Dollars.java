@@ -11,9 +11,6 @@ public class Dollars {
         this.amount = amount;
     }
 
-    public int toInt() {
-        return amount;
-    }
 
     public Dollars add(Dollars dollars) {
         return new Dollars(this.amount + dollars.amount);

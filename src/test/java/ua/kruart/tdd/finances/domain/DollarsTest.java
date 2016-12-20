@@ -32,12 +32,13 @@ public class DollarsTest {
         assertEquals(new Dollars(20), new Dollars(100).percentage(20));
         assertEquals(new Dollars(4), new Dollars(9).percentage(50)); // TODO: 12/20/2016 Convert Dollars to have pennies(use double?)
     }
-    
-    @Test
-    public void toInt() {
-        assertEquals(20, new Dollars(20).toInt());
-    }
 
+    @Test
+    public void equalsIgnoresPennies() {
+//        assertEquals(new Dollars(10), new Dollars(10.10)); // TODO: 12/20/2016 to do next time
+        
+    }
+    
     @Test
     public void valueObject() {
         Dollars dollars1a = new Dollars(10);

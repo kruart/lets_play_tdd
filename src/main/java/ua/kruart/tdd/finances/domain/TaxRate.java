@@ -7,30 +7,30 @@ import ua.kruart.tdd.finances.util.Require;
  */
 public class TaxRate {
 
-    private double rate;
+    private double rateAsPercentage;
 
     public TaxRate(double rateAsPercentage) {
-        Require.that(rateAsPercentage > 0, "tax rate must be positive(and not zero); was " + rateAsPercentage);
-        this.rate = rateAsPercentage / 100.0;
+        Require.that(rateAsPercentage > 0, "tax rateAsPercentage must be positive(and not zero); was " + rateAsPercentage);
+        this.rateAsPercentage = rateAsPercentage;
     }
 
     public Dollars simpleTaxFor(Dollars amount) {
-        return new Dollars((int)(rate * amount.toInt()));
+        return amount.percentage(rateAsPercentage);
     }
 
     public Dollars compoundTaxFor(Dollars amount) {
-        int amountAsInt = amount.toInt();
-        return new Dollars((int)((amountAsInt / (1 - rate)) - amountAsInt));
+        double compoundRate = (100 / (100 - rateAsPercentage)) - 1;
+        return amount.percentage(compoundRate * 100);
     }
 
     @Override
     public String toString() {
-        return (rate * 100)+ "%";
+        return (rateAsPercentage)+ "%";
     }
 
     @Override
     public int hashCode() {
-        long temp = Double.doubleToLongBits(rate);
+        long temp = Double.doubleToLongBits(rateAsPercentage);
         return (int) (temp ^ (temp >>> 32));
     }
 
@@ -41,6 +41,6 @@ public class TaxRate {
 
         TaxRate taxRate = (TaxRate) o;
 
-        return Double.compare(taxRate.rate, rate) == 0;
+        return Double.compare(taxRate.rateAsPercentage, rateAsPercentage) == 0;
     }
 }
