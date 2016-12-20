@@ -1,24 +1,13 @@
 package ua.kruart.tdd.finances.domain;
 
 import org.junit.Test;
-import ua.kruart.tdd.finances.domain.Dollars;
-import ua.kruart.tdd.finances.domain.TaxRate;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Arthur on 11.12.2016.
  */
 public class TaxRateTest {
-
-    @Test
-    public void nothing() {
-        TaxRate taxRate = new TaxRate(0);
-        assertEquals(new Dollars(0) , taxRate.simpleTaxFor(new Dollars(1000)));
-        assertEquals(new Dollars(0), taxRate.compoundTaxFor(new Dollars(1000)));
-    }
 
     @Test
     public void simpleTaxJustAppliesTaxRateToAmount() {

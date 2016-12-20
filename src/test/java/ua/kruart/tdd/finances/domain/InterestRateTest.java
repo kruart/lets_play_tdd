@@ -1,23 +1,13 @@
 package ua.kruart.tdd.finances.domain;
 
 import org.junit.Test;
-import ua.kruart.tdd.finances.domain.Dollars;
-import ua.kruart.tdd.finances.domain.InterestRate;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Arthur on 12.12.2016.
  */
 public class InterestRateTest {
-
-    @Test
-    public void nothing() {
-        InterestRate rate = new InterestRate(0);
-        assertEquals(new Dollars(0), rate.interestOn(new Dollars(1000)));
-    }
 
     @Test
     public void interest() {

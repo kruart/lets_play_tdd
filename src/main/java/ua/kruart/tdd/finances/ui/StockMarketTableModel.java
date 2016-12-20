@@ -2,6 +2,7 @@ package ua.kruart.tdd.finances.ui;
 
 import ua.kruart.tdd.finances.domain.StockMarket;
 import ua.kruart.tdd.finances.domain.StockMarketYear;
+import ua.kruart.tdd.finances.util.UnreachableCodeException;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -44,7 +45,7 @@ public class StockMarketTableModel extends AbstractTableModel {
             case 3: return currentYear.totalWithdrawn();
             case 4: return currentYear.appreciation();
             case 5: return currentYear.endingBalance();
-            default: return "";
+            default: throw new UnreachableCodeException();
         }
     }
 }

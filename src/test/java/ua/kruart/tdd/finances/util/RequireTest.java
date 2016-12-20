@@ -1,6 +1,5 @@
 package ua.kruart.tdd.finances.util;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -11,7 +10,6 @@ import static org.junit.Assert.fail;
  */
 public class RequireTest {
 
-    @Ignore
     @Test
     public void that() {
         try{
@@ -21,10 +19,4 @@ public class RequireTest {
             assertEquals("some message", e.getMessage());
         }
     }
-}
-
-class RequireException extends RuntimeException {
-    private static final long serialVersionUID = 1L;
-
-
 }
