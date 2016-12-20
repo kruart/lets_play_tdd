@@ -5,9 +5,13 @@ package ua.kruart.tdd.finances.domain;
  */
 public class Dollars {
 
-    private int amount;
+    private double amount;
 
     public Dollars(int amount) {
+        this.amount = amount;
+    }
+
+    public Dollars(double amount) {
         this.amount = amount;
     }
 
@@ -21,7 +25,7 @@ public class Dollars {
     }
 
     public Dollars subtractToZero(Dollars dollars) {
-        int result = this.amount - dollars.amount;
+        double result = this.amount - dollars.amount;
         return new Dollars(Math.max(0, result));
     }
 
@@ -29,24 +33,24 @@ public class Dollars {
         return new Dollars((int)(amount * percent / 100));
     }
 
+    private long roundOffPennies() {
+        return Math.round(this.amount);
+    }
+
     @Override
     public String toString() {
-        return "$" + amount;
+        return "$" + this.roundOffPennies();
     }
 
     @Override
     public int hashCode() {
-        return amount;
+        long temp = Double.doubleToLongBits(amount);
+        return (int) (temp ^ (temp >>> 32));
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Dollars dollars = (Dollars) o;
-
-        return amount == dollars.amount;
-
+        Dollars that = (Dollars)o;
+        return this.roundOffPennies() == that.roundOffPennies();
     }
 }
