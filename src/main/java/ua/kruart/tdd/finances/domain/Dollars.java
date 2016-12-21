@@ -44,8 +44,7 @@ public class Dollars {
 
     @Override
     public int hashCode() {
-        long temp = Double.doubleToLongBits(amount);
-        return (int) (temp ^ (temp >>> 32));
+        return (int)roundOffPennies();
     }
 
     @Override

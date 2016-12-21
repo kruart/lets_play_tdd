@@ -40,6 +40,13 @@ public class DollarsTest {
     }
 
     @Test
+    public void hashcodeIgnoresPenniesToo() {
+        assertTrue("should round down", new Dollars(10).hashCode() == new Dollars(10.10).hashCode());
+        assertTrue("should round up", new Dollars(10).hashCode() == new Dollars(9.90).hashCode());
+        assertTrue("should round up when we have exactly 50 cents", new Dollars(11).hashCode() == new Dollars(10.50).hashCode());
+    }
+
+    @Test
     public void toStringIgnoresPennies() {
         assertEquals("should round down", "$10", new Dollars(10.10).toString());
         assertEquals("should round up",  "$10", new Dollars(9.90).toString());
