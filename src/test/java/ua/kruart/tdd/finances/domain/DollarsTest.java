@@ -30,7 +30,6 @@ public class DollarsTest {
     @Test
     public void percentage() {
         assertEquals(new Dollars(20), new Dollars(100).percentage(20));
-        assertEquals(new Dollars(4), new Dollars(9).percentage(50)); // TODO: 12/20/2016 Convert Dollars to have pennies(use double?)
     }
 
     @Test

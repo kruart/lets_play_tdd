@@ -30,7 +30,7 @@ public class Dollars {
     }
 
     public Dollars percentage(double percent) {
-        return new Dollars((int)(amount * percent / 100));
+        return new Dollars(amount * percent / 100);
     }
 
     private long roundOffPennies() {
