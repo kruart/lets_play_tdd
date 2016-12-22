@@ -11,18 +11,18 @@ public class DollarsTest {
 
     @Test
     public void addition() {
-        assertEquals(new Dollars(40), new Dollars(10).add(new Dollars(30)));
+        assertEquals(new Dollars(40), new Dollars(10).plus(new Dollars(30)));
         
     }
 
     @Test
     public void subtraction() {
-        assertEquals("positive result", new Dollars(20), new Dollars(50).subtract(new Dollars(30)));
-        assertEquals("negative result", new Dollars(-60), new Dollars(40).subtract(new Dollars(100)));
+        assertEquals("positive result", new Dollars(20), new Dollars(50).minus(new Dollars(30)));
+        assertEquals("negative result", new Dollars(-60), new Dollars(40).minus(new Dollars(100)));
     }
 
     @Test
-    public void subtractToZero() {
+    public void minusToZero() {
         assertEquals("positive result", new Dollars(20), new Dollars(50).subtractToZero(new Dollars(30)));
         assertEquals("no negative result--return zero instead", new Dollars(0), new Dollars(40).subtractToZero(new Dollars(100)));
     }
@@ -30,6 +30,14 @@ public class DollarsTest {
     @Test
     public void percentage() {
         assertEquals(new Dollars(20), new Dollars(100).percentage(20));
+    }
+
+    @Test
+    public void maxOfTwoValues() {
+        Dollars value1 = new Dollars(20);
+        Dollars value2 = new Dollars(30);
+        assertEquals("value 1", new Dollars(30), value1.maxOfTwoValues(value2));
+        assertEquals("value 2", new Dollars(30), value2.maxOfTwoValues(value1));
     }
 
     @Test
