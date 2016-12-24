@@ -1,6 +1,5 @@
 package ua.kruart.tdd.finances.domain;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -31,18 +30,17 @@ public class StockMarketYearTest {
     public void capitalGainsTax() {
         StockMarketYear year = newYear();
         year.withdraw(new Dollars(4000));
-        assertEquals("capital gains tax includes tax on withdrawals to cover capital gains", new Dollars(333), year.capitalGainsTaxIncurred());
-        assertEquals("total withdrawn includes capital gains tax", new Dollars(4333), year.totalWithdrawn());
+        assertEquals("capital gains tax includes tax on withdrawals to cover capital gains", new Dollars(1333), year.capitalGainsTaxIncurred());
+        assertEquals("total withdrawn includes capital gains tax", new Dollars(5333), year.totalWithdrawn());
     }
 
     @Test
-    @Ignore
-    public void capitalGainsTaxIsPaidFirst() {
+    public void treatAllWithdrawalsAsSubjectToCapitalGainsTaxUntilAllCapitalGainsHaveBeenSold() {
         StockMarketYear year = newYear();
         Dollars capitalGains = STARTING_BALANCE.minus(STARTING_PRINCIPAL);
 
         year.withdraw(new Dollars(500));
-        assertEquals("pay tax on all withdrawals until all capital gains withdrawn", new Dollars(167), year.capitalGainsTaxIncurred());
+        assertEquals("pay tax on all entire withdrawal", new Dollars(167), year.capitalGainsTaxIncurred());
         year.withdraw(capitalGains);
         assertEquals("pay tax on all withdrawals until all capital gains withdrawn", new Dollars(2333), year.capitalGainsTaxIncurred());
         year.withdraw(new Dollars(1000));
@@ -51,7 +49,7 @@ public class StockMarketYearTest {
 
     @Test
     public void interestEarned() {
-        StockMarketYear year = newYear();
+        StockMarketYear year = new StockMarketYear(new Year(2010), new Dollars(10000), new Dollars(10000), new InterestRate(10), new TaxRate(25));
         assertEquals("basic interest earned", new Dollars(1000), year.appreciation());
         year.withdraw(new Dollars(2000));
         assertEquals("withdrawals don't earn interest", new Dollars(800), year.appreciation());

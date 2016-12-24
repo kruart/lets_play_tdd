@@ -49,10 +49,10 @@ public class StockMarketYear {
     }
 
     private Dollars capitalGainsWithdrawn() {
-        return totalWithdrawals.subtractToZero(startingPrincipal()); //OLD CODE - delete me
+//        return totalWithdrawals.subtractToZero(startingPrincipal()); //OLD CODE - delete me
 
-//        Dollars capitalGains = startingBalance().minus(startingPrincipal());
-//        return capitalGains.maxOfTwoValues(totalWithdrawals);
+        Dollars capitalGains = startingBalance().minus(startingPrincipal());
+        return capitalGains.minOfTwoValues(totalWithdrawals);
 //        return totalWithdrawals.subtractToZero(capitalGains);
     }
 
