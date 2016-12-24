@@ -49,12 +49,10 @@ public class StockMarketYearTest {
 
     @Test
     public void interestEarned() {
-        StockMarketYear year = new StockMarketYear(new Year(2010), new Dollars(10000), new Dollars(10000), new InterestRate(10), new TaxRate(25));
+        StockMarketYear year = newYear();
         assertEquals("basic interest earned", new Dollars(1000), year.appreciation());
         year.withdraw(new Dollars(2000));
-        assertEquals("withdrawals don't earn interest", new Dollars(800), year.appreciation());
-        year.withdraw(new Dollars(2000));
-        assertEquals("capital gains tax withdrawals don't earn interest", new Dollars(567), year.appreciation());
+        assertEquals("withdrawals (which pay capital gains tax) don't earn interest", new Dollars(733), year.appreciation());
     }
 
     @Test
@@ -73,9 +71,7 @@ public class StockMarketYearTest {
         StockMarketYear year = newYear();
         assertEquals("ending balance includes interest", new Dollars(11000), year.endingBalance());
         year.withdraw(new Dollars(1000));
-        assertEquals("ending balance includes withdrawals", new Dollars(9900), year.endingBalance());
-        year.withdraw(new Dollars(3000));
-        assertEquals("ending balance includes capital gains tax withdrawals", new Dollars(6233), year.endingBalance());
+        assertEquals("ending balance includes withdrawals (which pay capital gains tax) and interest rate", new Dollars(9533), year.endingBalance());
     }
 
     @Test

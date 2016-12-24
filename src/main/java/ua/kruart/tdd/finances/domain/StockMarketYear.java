@@ -49,11 +49,8 @@ public class StockMarketYear {
     }
 
     private Dollars capitalGainsWithdrawn() {
-//        return totalWithdrawals.subtractToZero(startingPrincipal()); //OLD CODE - delete me
-
         Dollars capitalGains = startingBalance().minus(startingPrincipal());
         return capitalGains.minOfTwoValues(totalWithdrawals);
-//        return totalWithdrawals.subtractToZero(capitalGains);
     }
 
     public Dollars capitalGainsTaxIncurred() {
