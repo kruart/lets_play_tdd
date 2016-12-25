@@ -56,6 +56,14 @@ public class StockMarketYearTest {
     }
 
     @Test
+    public void withdrawalsReducePrincipalAfterAllCapitalGainsAreWithdrawn() {
+        StockMarketYear year = newYear();
+        Dollars capitalGains = STARTING_BALANCE.minus(STARTING_PRINCIPAL);
+        year.withdraw(capitalGains);
+        assertEquals(STARTING_PRINCIPAL, year.endingPrincipal());
+    }
+
+    @Test
     public void endingPrincipal() {
         StockMarketYear year = newYear();
         year.withdraw(new Dollars(1000));
