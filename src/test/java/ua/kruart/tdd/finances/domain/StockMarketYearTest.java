@@ -57,10 +57,15 @@ public class StockMarketYearTest {
 
     @Test
     public void withdrawalsReducePrincipalAfterAllCapitalGainsAreWithdrawn() {
+        //TODO: extract startingCapitalGains
+
         StockMarketYear year = newYear();
-        Dollars capitalGains = STARTING_BALANCE.minus(STARTING_PRINCIPAL);
-        year.withdraw(capitalGains);
-        assertEquals(STARTING_PRINCIPAL, year.endingPrincipal());
+//        Dollars capitalGains = STARTING_BALANCE.minus(STARTING_PRINCIPAL);
+        year.withdraw(new Dollars(500));
+        assertEquals("withdrawals less than capital gains do not reduce principal", STARTING_PRINCIPAL, year.endingPrincipal());
+        year.withdraw(new Dollars(3000));
+        assertEquals(new Dollars(4667), year.totalWithdrawn());
+        assertEquals("principal should be reduced by difference between total withdrawals and capital gains", new Dollars(5333), year.endingPrincipal());
     }
 
     @Test

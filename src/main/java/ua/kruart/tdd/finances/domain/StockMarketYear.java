@@ -70,7 +70,9 @@ public class StockMarketYear {
     }
 
     public Dollars endingPrincipal() {
-        return startingPrincipal();
+        Dollars capitalGains = startingBalance().minus(startingPrincipal());
+        Dollars principalReducedBy = totalWithdrawn().subtractToZero(capitalGains);
+        return startingPrincipal().minus(principalReducedBy);
 //        return startingPrincipal().subtractToZero(totalWithdrawals);
     }
 
